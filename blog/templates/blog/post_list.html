@@ -12,11 +12,7 @@
         <div>
             {% for post in posts %}
                 <div>
-<<<<<<< HEAD
-                    <p>published: {{ post.created_date }}</p>
-=======
-                    <p>published: {{ post.published_date }}</p>
->>>>>>> c8e6d6df5d012e0fe651f44e81946a5d8c653423
+                    <p>created: {{ post.created_date }}</p>
                     <h1><a href="">{{ post.title }}</a></h1>
                     <p>{{ post.text|linebreaksbr }}</p>
                 </div>
