@@ -1,0 +1,21 @@
+<!-- blog/templates/blog/base.html -->
+{% load static %}
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <title>nyanguk의 Django 튜토리얼</title>
+    </head>
+    <body>
+        <div class = title-1>
+            <h1> <a href="">nyanguk의 블로그</a></h1>
+        </div>
+        <div class = post>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
