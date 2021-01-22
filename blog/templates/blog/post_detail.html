@@ -7,6 +7,7 @@
         </div>
     {% else %}
         <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+        <a class="btn btn-default" href="{% url 'post_ delete' pk=post.pk %}">Delete</a>
     {% endif %}
     <h1>{{ post.title }}</h1>
     <p>{{ post.text|linebreaksbr }}</p>
