@@ -24,7 +24,7 @@ def post_new(request):
             return redirect('post_detail', pk=post.pk)
     else:                               # 입력 양식을 보여줘야 할때 
         form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'blog/post_new.html', {'form': form})
 
 def post_draft_list(request):
     posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
