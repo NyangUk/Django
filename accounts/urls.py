@@ -1,10 +1,10 @@
 # accounts/urls.py
 from django.contrib import admin
 from django.urls import path
-import blog.views
+from . import views
 
 urlpatterns = [
-    path(r'accounts/signup', ),
-    path(r'accounts/login', ),
-    path(r'accounts/logout', ),
+    path(r'signup',views.signup,name='signup' ),
+    path(r'login',views.login,name='login' ),
+    path(r'logout',views.logout,name ='logout' ),
 ]
