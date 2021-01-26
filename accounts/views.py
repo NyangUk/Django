@@ -9,10 +9,17 @@ import blog.urls
 # 회원 가입
 def signup(request):
     if request.method == 'POST':
-        if request.POST['userPw'] == request.POST['confirm']:
-            user = User.objects.create_user(username=request.POST['userId'], password=request.POST['userPw'])
-            auth.login(request, user)
-            return redirect('post_list')
+        if User.objects.filter(username=request.POST['userId']).values(): # 이미 아이디가 있다면
+            err = 0
+            return render(request, 'accounts/error.html',{'err':err})
+        else:
+            if request.POST['userPw'] == request.POST['confirm']:
+                user = User.objects.create_user(username=request.POST['userId'], password=request.POST['userPw'])
+                auth.login(request, user)
+                return redirect('post_list')
+            else:
+                err = 1
+                return render(request, 'accounts/error.html',{'err':err})
     return render(request, 'accounts/signup.html')
 
 # 로그인
