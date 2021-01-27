@@ -39,7 +39,5 @@ def login(request):
 
 # 로그 아웃
 def logout(request):
-    if request.method == 'POST':
-        auth.logout(request)
-        return redirect('post_list')
-    return render(request, 'accounts/login.html')
+    auth.logout(request)
+    return redirect('post_list')
