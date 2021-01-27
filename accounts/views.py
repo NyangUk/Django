@@ -33,7 +33,7 @@ def login(request):
             auth.login(request, user)
             return redirect('post_list')
         else:
-            return render(request, 'login.html', {'error' : 'userId or userPw is incorrect.'})
+            return render(request, 'accounts/error.html', {'err' :2})
     else:
         return render(request, 'accounts/login.html')
 
