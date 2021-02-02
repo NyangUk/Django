@@ -3,6 +3,7 @@ from django.contrib import admin
 from post.models import Category, Post, Comment
 from member.models import Member
 from post.forms import MyPostAdminForm
+from .filters import CreatedDateFilter
 # Register your models here.
 class PostAdmin(admin.ModelAdmin):
     form = MyPostAdminForm
@@ -12,7 +13,7 @@ class PostAdmin(admin.ModelAdmin):
     list_editable = ('is_deleted', )
     list_filter = (
     'member__permission',
-    'category__name', 'is_deleted', )
+    'category__name', 'is_deleted',CreatedDateFilter )
     # fields = ('member','category','title',)
     fieldsets = (
         ('기본정보', {
