@@ -1,7 +1,9 @@
 from django.contrib import admin
 from member.models import Member
 from post.models import Post
-from datetime import date
+from datetime import date 
+from django.contrib import messages
+from django.utils.translation import ngettext
 
 class MemberAdmin(admin.ModelAdmin):
     actions = ['certify_user']    # action 추가 
@@ -17,7 +19,8 @@ class MemberAdmin(admin.ModelAdmin):
 
     # action_1 사용자 인증하기
     def certify_user(self, request ,queryset):
-        queryset.update(is_certificated = True,certification_date =date.today())
+        update = queryset.update(is_certificated = True,certification_date =date.today())
+        self.message_user(request,'{0} 명의 사용자가 성공적으로 인증 되었습니다.'.format(update), messages.SUCCESS)
 
     certify_user.short_description = "선택된 사용자를 인증합니다."
 
