@@ -3,13 +3,8 @@ from member.models import Member
 from post.models import Post
 from datetime import date
 
-# action_1 사용자 인증하기
-def certify_user(modeladmin, request ,queryset):
-    queryset.update(is_certificated = True,certification_date =date.today())
-certify_user.short_description = "선택된 사용자를 인증합니다."
-
 class MemberAdmin(admin.ModelAdmin):
-    actions = [certify_user]    # action 추가 
+    actions = ['certify_user']    # action 추가 
     list_per_page = 5
     list_display = (
         'id','email','username','permission',
@@ -19,6 +14,12 @@ class MemberAdmin(admin.ModelAdmin):
     list_filter = ('permission', )
     search_fields = ('username', )
     ordering = ('-id', 'email', 'permission', )
+
+    # action_1 사용자 인증하기
+    def certify_user(self, request ,queryset):
+        queryset.update(is_certificated = True,certification_date =date.today())
+
+    certify_user.short_description = "선택된 사용자를 인증합니다."
 
     def post_count(self, obj):
         return Post.objects.filter(member=obj).count()
