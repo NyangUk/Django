@@ -4,7 +4,7 @@ from post.models import Category, Post, Comment
 from member.models import Member
 from post.forms import MyPostAdminForm
 from .filters import CreatedDateFilter
-from django.urls import url
+from django.urls import path
 from django.template.response import TemplateResponse
 # Register your models here.
 class PostAdmin(admin.ModelAdmin):
@@ -31,15 +31,17 @@ class PostAdmin(admin.ModelAdmin):
     )
 
     def get_urls(self):
-        urls = super(PostAdmin, self).get_urls()
+        urls = super().get_urls()
         post_urls = [
-        url(r'^status/$', self.admin_site.admin_view(self.post_status_view))
+            path(r'status/', self.admin_site.admin_view(self.post_status_view))
+        # url(r'^status/$', self.admin_site.admin_view(self.post_status_view))
         ]
         return post_urls + urls
     def post_status_view(self, request):
         context = dict(
         self.admin_site.each_context(request),
         posts=Post.objects.all(),
+        # key = value,
         )
         return TemplateResponse(request, "admin/post_status.html", context)
     
