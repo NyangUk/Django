@@ -1,19 +1,26 @@
 {% load static %}
 <html>
     <head>
-        <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Roboto&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <title>교육봉사동아리 JOA </title>
+        <title>동아리 </title>
     </head>
     <body>
         <div class = title >
             <h1> <a href="http://127.0.0.1:8000/">JOA</a></h1>
         </div>
+        {% for category in post_category %}
+            <div> 
+                {% for post in category %}
+                    <div>
+                        <h4>{{post.title}} -- 분류: {{post.category}} </h4>
+                        <p>작성자 :{{post.member}} -- 작성일 :{{post.created_at}}</p>
+                        <p>{{post.content}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <div class = base>
+        </div>
         <div class = menu>
-
         </div>
         <div class= post>
             {% block content %}
