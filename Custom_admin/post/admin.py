@@ -5,8 +5,26 @@ from member.models import Member
 from post.forms import MyPostAdminForm
 from .filters import CreatedDateFilter
 from django.urls import path
+import datetime
 from django.template.response import TemplateResponse
+from django.shortcuts import  get_object_or_404
 # Register your models here.
+posts = Post.objects.all()
+categotys =Category.objects.all()
+class CategoryAdmin(admin.ModelAdmin):
+    # form = 
+    
+    list_per_page =10
+    list_display = (
+        'id' ,'name' , 'post_count' , 'post_recent'
+    )
+    def post_count(self, obj):
+        return Post.objects.filter(category=obj).count()
+    def post_recent(self, obj):
+        li =[]
+        for i in Post.objects.filter(category=obj):
+            li.append(i.created_at.ctime())
+        return li
 class PostAdmin(admin.ModelAdmin):
     form = MyPostAdminForm
     list_per_page = 10
@@ -46,5 +64,5 @@ class PostAdmin(admin.ModelAdmin):
         return TemplateResponse(request, "admin/post_status.html", context)
     
 admin.site.register(Post,PostAdmin)
-admin.site.register(Category)
+admin.site.register(Category,CategoryAdmin)
 admin.site.register(Comment)
